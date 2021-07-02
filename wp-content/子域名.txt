@@ -1,0 +1,20 @@
+子域名配置样式显示混乱，用下面代码，加入外面的php文件保存到wp-content文件夹下面。（注意配置路由重写规则）
+
+
+define('MULTISITE', true);
+define('SUBDOMAIN_INSTALL', false);
+define('DOMAIN_CURRENT_SITE', 'www.v2.com');
+define('PATH_CURRENT_SITE', '/');
+define('SITE_ID_CURRENT_SITE', 1);
+define('BLOG_ID_CURRENT_SITE', 1);
+
+$host = $_SERVER['HTTP_HOST'];
+
+
+if (!preg_match('/www\.v2\.com/i', $host)) {
+    define('SUNRISE', true);
+    /** This should be the TLD in the database */
+    define('WP_PROD_TLD', 'www.v2.com');
+    /** This should be the tld of your local copy */
+    define('WP_DEV_TLD', $host);
+}
